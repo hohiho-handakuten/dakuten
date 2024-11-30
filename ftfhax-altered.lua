@@ -577,7 +577,7 @@ CreditTotalText_3.BorderSizePixel = 0
 CreditTotalText_3.Position = UDim2.new(1, -111, 0, 0)
 CreditTotalText_3.Size = UDim2.new(0, 120, 1, 0)
 CreditTotalText_3.ZIndex = 5
-CreditTotalText_3.Text = ver
+CreditTotalText_3.Text = "v"..ver
 CreditTotalText_3.TextColor3 = Color3.fromRGB(255, 255, 0)
 CreditTotalText_3.TextScaled = true
 CreditTotalText_3.TextSize = 34.000
@@ -1026,7 +1026,12 @@ end)
 
 spawn(function() -- never fail hacking
     while wait() do
-        game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult",true)
+	game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult", true)
+        game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle:GetPropertyChangedSignal("Visible"):connect(function()
+	    if game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle.Visible == true then
+	        game.ReplicatedStorage.RemoteEvent:FireServer("Input", "Action", true)
+	    end
+        end)
     end
 end)
 
