@@ -1025,14 +1025,21 @@ spawn(function() --reload esp when character loads/deloads
 end)
 
 spawn(function() -- never fail hacking
-    while wait() do
-	game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult", true)
-        game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle:GetPropertyChangedSignal("Visible"):connect(function()
-	    if game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle.Visible == true then
-		wait(0.5)
-	        game.ReplicatedStorage.RemoteEvent:FireServer("Input", "Action", true)
+    if neverfailtoggle then
+	game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle:GetPropertyChangedSignal("Visible"):connect(function()
+	    if neverfailtoggle then
+	        if game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle.Visible == true then
+	            wait(1)
+	            game.ReplicatedStorage.RemoteEvent:FireServer("Input", "Action", true)
+	        end
 	    end
-        end)
+	end)
+            
+        while wait() do
+	    if neverfailtoggle then
+	        game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult", true)
+	    end
+        end
     end
 end)
 
