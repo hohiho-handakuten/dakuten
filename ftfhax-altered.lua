@@ -1029,7 +1029,7 @@ spawn(function() -- never fail hacking
 	game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult", true)
         game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle:GetPropertyChangedSignal("Visible"):connect(function()
 	    if game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle.Visible == true then
-		task.wait(2)
+		wait(0.5)
 	        game.ReplicatedStorage.RemoteEvent:FireServer("Input", "Action", true)
 	    end
         end)
